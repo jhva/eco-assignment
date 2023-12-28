@@ -1,0 +1,98 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.1.5'
+    id 'io.spring.dependency-management' version '1.1.3'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+}
+
+group = 'com.wanted'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    asciidoctorExt // html 자동 변경 사용 설정
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    //p6spy 설치 (3.x는 1.9.0버전 사용해야함)
+    implementation "com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0"
+
+    // jsonParser 설치 (open api 응답값 파싱)
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+
+    // JWT 토큰 관련 라이브러리
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    // .adocs를 html로 자동 변화
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+
+    // Querydsl 설치
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    testImplementation 'com.h2database:h2'
+}
+
+tasks.named('test') {
+    outputs.dir snippetsDir
+    useJUnitPlatform()
+}
+
+tasks.named('asciidoctor') {
+    inputs.dir snippetsDir
+    dependsOn test
+    configurations 'asciidoctorExt' // html 자동 변경 사용
+    baseDirFollowsSourceFile() // .adoc 파일에서 다른.adoc 파일을 include하여 사용할 때 경로를 동일하게 baseDir로 설정
+}
+
+asciidoctor.doFirst {
+    delete file('src/main/resources/static/docs') //실행 전 이전 html 삭제
+}
+
+// build/docs/asciidoc 에 생성된 html 문서를 src/main/resources/static/docs 에 복사해온다.
+task createDocument(type: Copy) {
+    dependsOn asciidoctor // asciidoctor 후 실행
+
+    from file("build/docs/asciidoc")
+    into file("src/main/resources/static")
+}
+
+//jar의 static/docs에 문서 복사
+bootJar {
+    dependsOn createDocument
+
+    from("${asciidoctor.outputDir}") {
+        into 'static/docs'
+    }
+}
+
+//빌드전 createDocument 실행
+build {
+    dependsOn createDocument
+}
