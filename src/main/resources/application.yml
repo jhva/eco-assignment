@@ -12,12 +12,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
     properties:
       hibernate:
         format_sql: true
     defer-datasource-initialization: true
   sql:
     init:
-      mode: always # ?? ??? ?? classpath? sql?? ????? ??
-      schema-locations: classpath:sql/hr-schema-mysql.sql # ?? ??? ddl sql?? ??? ?? ? ?? ??
+      mode: always
+      schema-locations: classpath:sql/hr-schema-mysql.sql
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
