@@ -10,6 +10,11 @@ PathParameter
 
 include::{snippets}/employee-controller-test/특정_사원의_현재_정보를_조회한다/path-parameters.adoc[]
 
+Response
+
 - 200 Ok
 
 include::{snippets}/employee-controller-test/특정_사원의_현재_정보를_조회한다/http-response.adoc[]
+
+- 400 BadRequest
+include::{snippets}/employee-controller-test/특정_사원의_현재_정보_실패/http-response.adoc[]

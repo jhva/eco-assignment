@@ -1,5 +1,6 @@
 package com.api.ecoassignment.domain.employee.api;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
@@ -9,15 +10,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.api.ecoassignment.config.restdocs.AbstractRestDocsTests;
 import com.api.ecoassignment.domain.employee.application.EmployeeService;
 import com.api.ecoassignment.domain.employee.dto.response.EmployeeResponse;
+import com.api.ecoassignment.global.error.BusinessException;
+import com.api.ecoassignment.global.error.ErrorCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @WebMvcTest(EmployeeController.class)
 public class EmployeeControllerTest extends AbstractRestDocsTests {
@@ -30,7 +35,9 @@ public class EmployeeControllerTest extends AbstractRestDocsTests {
     @MockBean
     private EmployeeService employeeService;
 
+
     @Test
+    @DisplayName("성공적으로 특정 사원의 정보를 조회한다")
     void 특정_사원의_현재_정보를_조회한다() throws Exception {
 
         EmployeeResponse employee = EmployeeResponse.builder()
@@ -62,4 +69,17 @@ public class EmployeeControllerTest extends AbstractRestDocsTests {
         Assertions.assertEquals(employee.getEmail(), employeeResponse.getEmail());
 
     }
+
+    @Test
+    @DisplayName("특정 사원의 정보를 조회하는데 실패한다")
+    void 특정_사원의_현재_정보_실패() throws Exception {
+
+        given(employeeService.findSpecificEmployee(any())).willThrow(new BusinessException(1L, "employeeId",
+                ErrorCode.SPECIFIC_EMPLOYEE_NOT_FOUND));
+
+        mockMvc.perform(get(EMPLOYEE_URL + "/find-specific/{id}", 1L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
 }

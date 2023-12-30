@@ -1,7 +1,5 @@
 package com.api.ecoassignment.domain.employee.api;
 
-import static org.springframework.http.HttpStatus.OK;
-
 import com.api.ecoassignment.domain.employee.application.EmployeeService;
 import com.api.ecoassignment.domain.employee.dto.response.EmployeeResponse;
 import com.api.ecoassignment.global.format.apiResponse.ApiResponse;
@@ -22,7 +20,7 @@ class EmployeeController {
     @GetMapping("/find-specific/{id}")
     public ResponseEntity<ApiResponse> findSpecificEmployee(@PathVariable Long id) {
         EmployeeResponse employeeResponse = employeeService.findSpecificEmployee(id);
-        return ResponseEntity.status(OK)
+        return ResponseEntity.ok()
                 .body(ApiResponse.toSuccessForm(employeeResponse));
     }
 
