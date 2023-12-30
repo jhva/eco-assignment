@@ -1,0 +1,15 @@
+== 특정 사원
+
+=== 특정 사원 정보 조회
+
+Request
+
+include::{snippets}/employee-controller-test/특정_사원의_현재_정보를_조회한다/httpie-request.adoc[]
+
+PathParameter
+
+include::{snippets}/employee-controller-test/특정_사원의_현재_정보를_조회한다/path-parameters.adoc[]
+
+- 200 Ok
+
+include::{snippets}/employee-controller-test/특정_사원의_현재_정보를_조회한다/http-response.adoc[]

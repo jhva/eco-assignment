@@ -1,8 +1,9 @@
 package com.api.ecoassignment.domain.employee.api;
 
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.api.ecoassignment.config.restdocs.AbstractRestDocsTests;
@@ -47,11 +48,13 @@ public class EmployeeControllerTest extends AbstractRestDocsTests {
 
         EmployeeResponse employeeResponse = employeeService.findSpecificEmployee(100L);
 
-        mockMvc.perform(get(EMPLOYEE_URL + "/find-specific/100")
-                        .contentType(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(employeeResponse)))
+        mockMvc.perform(get(EMPLOYEE_URL + "/find-specific/{id}", employeeResponse.getEmployeeId())
+                        .contentType(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(restDocs.document(
+                        pathParameters(
+                                parameterWithName("id").description("특정 사원 id")
+                        )));
 
         Assertions.assertEquals(employee.getEmployeeId(), employeeResponse.getEmployeeId());
         Assertions.assertEquals(employee.getFirstName(), employeeResponse.getFirstName());
