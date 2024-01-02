@@ -24,4 +24,9 @@ class EmployeeController {
                 .body(ApiResponse.toSuccessForm(employeeResponse));
     }
 
+    @GetMapping("/detail-find/{id}")
+    public ResponseEntity<ApiResponse> findDetailSpecific(@PathVariable Long id) {
+        
+        return ResponseEntity.ok().body(null);
+    }
 }
