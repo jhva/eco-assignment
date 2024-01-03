@@ -13,6 +13,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -62,6 +63,6 @@ public class Employee {
     private Department department;
 
     @OneToMany(mappedBy = "employee")
-    private List<JobHistory> jobHistory;
+    private List<JobHistory> jobHistory = new ArrayList<>();
 
 }

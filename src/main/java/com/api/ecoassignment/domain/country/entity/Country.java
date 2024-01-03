@@ -10,15 +10,18 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "countries")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Country {
 
     @Id
-    @Column(name = "country_id", length = 2)
+    @Column(name = "country_id")
     private String countryId;
 
     @Column(name = "country_name", length = 40)

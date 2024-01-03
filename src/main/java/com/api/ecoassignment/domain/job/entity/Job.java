@@ -1,10 +1,14 @@
 package com.api.ecoassignment.domain.job.entity;
 
 
+import com.api.ecoassignment.domain.jobhistory.entity.JobHistory;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +31,9 @@ public class Job {
 
     @Column(name = "max_salary")
     private Integer maxSalary;
+
+
+    @OneToMany(mappedBy = "job")
+    private List<JobHistory> jobHistory = new ArrayList<>();
 
 }
