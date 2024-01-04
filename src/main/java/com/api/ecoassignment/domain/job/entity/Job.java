@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
@@ -27,10 +28,10 @@ public class Job {
     private String jobTitle;
 
     @Column(name = "min_salary")
-    private Integer minSalary;
+    private BigDecimal minSalary;
 
     @Column(name = "max_salary")
-    private Integer maxSalary;
+    private BigDecimal maxSalary;
 
 
     @OneToMany(mappedBy = "job")

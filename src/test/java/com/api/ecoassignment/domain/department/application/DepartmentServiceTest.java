@@ -39,26 +39,18 @@ public class DepartmentServiceTest {
     @Nested
     class 특정_부서_급여_인상 {
 
-        @Test
-        void 특정_부서_급여를_임의의_비율로_계산하고_MAX_SALARY_필드보다_높을_경우_FALSE() {
-            List<?> findDepartment = departmentService.updateDepartmentIncreaseSalary("Purchasing");
-
-        }
 
         @Test
-        void 특정_부서_급여를_임의의_비율로_계산하고_MAX_SALARY_필드보다_낮을_경우_TRUE() {
-
-        }
-
-        @Test
-        void TRUE_경우_사원ID_기준_급여를_UPDATE_후_저장한다() {
+        void 부서_Purchasing에_속하고_급여를_임시로_60퍼센트_인상될때_값이_변하지않는ID는_하나뿐이다() {
+            List<Long> data = departmentService.updateDepartmentIncreaseSalary("Purchasing", 60);
+            Assertions.assertEquals(data.size(), 1);
 
         }
 
         @Test
         void 조회된_갯수가_0개인_경우() {
             assertThatThrownBy(() ->
-                    departmentService.updateDepartmentIncreaseSalary("ㅁㄴㅇㄹ"))
+                    departmentService.updateDepartmentIncreaseSalary("ㅁㄴㅇㄹ", 10))
                     .isInstanceOf(BusinessException.class)
                     .hasMessage("해당 부서를 찾을 수 없습니다. ");
         }
@@ -66,7 +58,7 @@ public class DepartmentServiceTest {
         @Test
         void 컬럼이_null_경우_예외를_발생시킨다() {
             assertThatThrownBy(() ->
-                    departmentService.updateDepartmentIncreaseSalary("NOC"))
+                    departmentService.updateDepartmentIncreaseSalary("NOC", 10))
                     .isInstanceOf(BusinessException.class)
                     .hasMessage("해당 부서는 급여 정보가 누락되었습니다. \n 다시 입력해주세요");
         }

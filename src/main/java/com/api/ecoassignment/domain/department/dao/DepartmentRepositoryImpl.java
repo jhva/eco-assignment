@@ -10,6 +10,7 @@ import com.api.ecoassignment.domain.location.entity.QLocation;
 import com.api.ecoassignment.domain.region.entity.QRegion;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -56,5 +57,13 @@ public class DepartmentRepositoryImpl implements DepartmentQueryRepository {
                 .where(qd.departmentName.eq(name)).fetch();
 
         return queryFindDepartment;
+    }
+
+    @Override
+    public void updateDepartmentByDepartmentName(BigDecimal resultSum, Long id) {
+        queryFactory.update(qe)
+                .set(qe.salary, resultSum)
+                .where(qe.employeeId.eq(id))
+                .execute();
     }
 }

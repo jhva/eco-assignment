@@ -7,7 +7,12 @@ import com.api.ecoassignment.domain.department.dto.response.DepartmentResponseDt
 import com.api.ecoassignment.domain.department.entity.Department;
 import com.api.ecoassignment.global.error.BusinessException;
 import com.api.ecoassignment.global.error.ErrorCode;
+import jakarta.transaction.Transactional;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +21,6 @@ import org.springframework.stereotype.Service;
 public class DepartmentService {
 
     private final DepartmentRepository departmentRepository;
-
 
     public DepartmentResponseDto findDepartmentAndLocationById(Long id) {
         Long departmentId = validateDepartmentCheckId(id);
@@ -30,15 +34,42 @@ public class DepartmentService {
         return department.getDepartmentId();
     }
 
-    public List<?> updateDepartmentIncreaseSalary(String departmentName) {
+    @Transactional
+    public List<Long> updateDepartmentIncreaseSalary(String departmentName, Integer impression) {
+        List<DepartmentAndEmployeeDto> findDepartmentByDepartmentName = checkDepartmentIsEmptyAndNull(departmentName);
+        List<Long> errorEmployeeLongId = new ArrayList<>();
+        Map<Boolean, BigDecimal> resultActions = new HashMap<>();
 
-        List<?> findDepartmentByDepartmentName = checkDepartmentIsEmptyAndNull(departmentName);
+        for (DepartmentAndEmployeeDto departmentAndEmployee : findDepartmentByDepartmentName) {
+            processEmployeeData(departmentAndEmployee, impression, resultActions, errorEmployeeLongId);
+        }
 
-        return findDepartmentByDepartmentName;
+        return errorEmployeeLongId;
+    }
+
+    private void processEmployeeData(DepartmentAndEmployeeDto departmentAndEmployee, Integer impression,
+            Map<Boolean, BigDecimal> resultActions, List<Long> errorEmployeeLongId) {
+
+        BigDecimal resultSum = calculateResult(departmentAndEmployee.getSalary(), impression);
+        boolean isLessThanMaximumSalary = resultSum.compareTo(departmentAndEmployee.getMaxSalary()) > 0;
+        resultActions.put(isLessThanMaximumSalary, resultSum);
+
+        if (!isLessThanMaximumSalary) {
+            departmentRepository.updateDepartmentByDepartmentName(resultSum, departmentAndEmployee.getEmployeeId());
+        } else {
+            errorEmployeeLongId.add(departmentAndEmployee.getEmployeeId());
+        }
+    }
+
+    private BigDecimal calculateResult(BigDecimal salary, double impression) {
+        BigDecimal value1 = new BigDecimal(String.valueOf(salary));
+        BigDecimal value2 = new BigDecimal(String.valueOf(impression)).divide(new BigDecimal("100"));
+        BigDecimal result = value1.multiply(value2);
+        return value1.add(result);
     }
 
 
-    public List<DepartmentAndEmployeeDto> checkDepartmentIsEmptyAndNull(String departmentName) {
+    private List<DepartmentAndEmployeeDto> checkDepartmentIsEmptyAndNull(String departmentName) {
         List<DepartmentAndEmployeeDto> department = departmentRepository.searchDepartmentByDepartmentName(
                 departmentName);
 

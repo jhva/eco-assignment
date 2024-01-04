@@ -13,6 +13,6 @@ public class DepartmentAndEmployeeDto {
     private Long employeeId;
     private String departmentName;
     private BigDecimal salary;
-    private Integer minSalary;
-    private Integer maxSalary;
+    private BigDecimal minSalary;
+    private BigDecimal maxSalary;
 }
