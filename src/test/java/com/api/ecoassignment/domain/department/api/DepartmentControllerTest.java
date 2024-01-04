@@ -9,7 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.api.ecoassignment.config.restdocs.AbstractRestDocsTests;
 import com.api.ecoassignment.domain.department.application.DepartmentService;
-import com.api.ecoassignment.domain.department.dto.DepartmentResponseDto;
+import com.api.ecoassignment.domain.department.dto.response.DepartmentResponseDto;
 import com.api.ecoassignment.global.error.BusinessException;
 import com.api.ecoassignment.global.error.ErrorCode;
 import org.junit.jupiter.api.Assertions;

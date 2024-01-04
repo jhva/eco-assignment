@@ -1,4 +1,4 @@
-package com.api.ecoassignment.domain.department.dto;
+package com.api.ecoassignment.domain.department.dto.response;
 
 
 import lombok.AllArgsConstructor;

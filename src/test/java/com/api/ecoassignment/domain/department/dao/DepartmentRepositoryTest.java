@@ -1,7 +1,8 @@
 package com.api.ecoassignment.domain.department.dao;
 
-import com.api.ecoassignment.domain.department.dto.DepartmentResponseDto;
+import com.api.ecoassignment.domain.department.dto.response.DepartmentResponseDto;
 import com.api.ecoassignment.global.querydsl.QuerydslConfig;
+import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,12 @@ public class DepartmentRepositoryTest {
         Assertions.assertThat(departmentResponseDto.getPostalCode()).isEqualTo("98199");
         Assertions.assertThat(departmentResponseDto.getCity()).isEqualTo("Seattle");
         Assertions.assertThat(departmentResponseDto.getStateProvince()).isEqualTo("Washington");
+    }
+
+    @Test
+    void 특정_부서_급여_인상을_위한_부서와_사원_직업테이블을_조회한다() {
+        List<?> departmentAllByDepartmentName = departmentRepository.updateDepartmentIncreaseSalary("Purchasing");
+
+        Assertions.assertThat(departmentAllByDepartmentName.size()).isEqualTo(6);
     }
 }

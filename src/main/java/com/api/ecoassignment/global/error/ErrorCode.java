@@ -10,7 +10,8 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     SPECIFIC_EMPLOYEE_NOT_FOUND("해당 사원을 찾을 수 없습니다. ", HttpStatus.BAD_REQUEST),
-    DEPARTMENT_NOT_FOUND("해당 부서를 찾을 수 없습니다. ", HttpStatus.BAD_REQUEST);
+    DEPARTMENT_NOT_FOUND("해당 부서를 찾을 수 없습니다. ", HttpStatus.BAD_REQUEST),
+    CAN_NOT_SALARY_INCREASE("최저 %d 최고 d% 사이로 맞춰주세요 ", HttpStatus.BAD_REQUEST);
 
     //오류 메시지
     private final String message;

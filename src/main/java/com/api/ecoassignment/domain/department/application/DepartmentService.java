@@ -2,7 +2,7 @@ package com.api.ecoassignment.domain.department.application;
 
 
 import com.api.ecoassignment.domain.department.dao.DepartmentRepository;
-import com.api.ecoassignment.domain.department.dto.DepartmentResponseDto;
+import com.api.ecoassignment.domain.department.dto.response.DepartmentResponseDto;
 import com.api.ecoassignment.domain.department.entity.Department;
 import com.api.ecoassignment.global.error.BusinessException;
 import com.api.ecoassignment.global.error.ErrorCode;

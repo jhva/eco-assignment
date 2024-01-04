@@ -2,7 +2,7 @@ package com.api.ecoassignment.domain.department.api;
 
 
 import com.api.ecoassignment.domain.department.application.DepartmentService;
-import com.api.ecoassignment.domain.department.dto.DepartmentResponseDto;
+import com.api.ecoassignment.domain.department.dto.response.DepartmentResponseDto;
 import com.api.ecoassignment.global.format.apiResponse.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
