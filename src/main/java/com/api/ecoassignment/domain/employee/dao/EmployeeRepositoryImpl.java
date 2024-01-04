@@ -37,7 +37,7 @@ public class EmployeeRepositoryImpl implements EmployeeQueryRepository {
         return queryFactory
                 .select(
                         Projections.constructor(EmployeeDetailsResponseDto.class, qe.email, qe.firstName,
-                                qe.commissionPct, qe.lastName, qe.phoneNumber,
+                                qe.commissionPct, qe.lastName, qe.phoneNumber, qe.hireDate,
                                 qe.employeeId, qe.salary,
                                 qj.jobId, qj.jobTitle, qj.maxSalary, qj.minSalary,
                                 qd.departmentId, qd.departmentName,

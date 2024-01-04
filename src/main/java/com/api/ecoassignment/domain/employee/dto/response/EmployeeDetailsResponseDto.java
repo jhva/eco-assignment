@@ -2,6 +2,7 @@ package com.api.ecoassignment.domain.employee.dto.response;
 
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,4 +34,5 @@ public class EmployeeDetailsResponseDto {
     private String countryName;
     private Long regionId;
     private String regionName;
+    private LocalDateTime hireDate;
 }

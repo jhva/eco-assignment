@@ -1,6 +1,7 @@
 package com.api.ecoassignment.domain.employee.api;
 
 import com.api.ecoassignment.domain.employee.application.EmployeeService;
+import com.api.ecoassignment.domain.employee.dto.response.EmployeeDetailsResponseDto;
 import com.api.ecoassignment.domain.employee.dto.response.EmployeeResponse;
 import com.api.ecoassignment.global.format.apiResponse.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ class EmployeeController {
 
     @GetMapping("/detail-find/{id}")
     public ResponseEntity<ApiResponse> findDetailSpecific(@PathVariable Long id) {
-        
-        return ResponseEntity.ok().body(null);
+        EmployeeDetailsResponseDto employeeDetailsResponseDto = employeeService.findEmployeeRecord(id);
+        return ResponseEntity.ok().body(ApiResponse.toSuccessForm(employeeDetailsResponseDto));
     }
 }
