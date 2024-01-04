@@ -19,7 +19,7 @@ public class EmployeeService {
     public EmployeeResponse findSpecificEmployee(Long employeeId) {
         Employee employeeResponses = findById(employeeId);
 
-        EmployeeResponse employeeResponse = EmployeeResponse.entityToDto(employeeResponses);
+        EmployeeResponse employeeResponse = employeeRepository.searchCurrentEmployee(employeeResponses.getEmployeeId());
         return employeeResponse;
     }
 

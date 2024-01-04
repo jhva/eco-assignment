@@ -2,7 +2,7 @@ package com.api.ecoassignment.domain.employee.dao;
 
 
 import com.api.ecoassignment.domain.employee.dto.response.EmployeeDetailsResponseDto;
-import com.api.ecoassignment.domain.employee.entity.Employee;
+import com.api.ecoassignment.domain.employee.dto.response.EmployeeResponse;
 import com.api.ecoassignment.global.querydsl.QuerydslConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class EmployeeRepositoryTest {
 
     @Test
     public void 특정_사원의_현재_정보를_사원ID_기준으로_조회한다() {
-        Employee employee = employeeRepository.findById(100L).orElse(null);
+        EmployeeResponse employee = employeeRepository.searchCurrentEmployee(100L);
 
         Assertions.assertEquals(employee.getFirstName(), "Steven");
         Assertions.assertEquals(employee.getEmployeeId(), 100);

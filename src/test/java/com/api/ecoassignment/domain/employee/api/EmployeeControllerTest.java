@@ -47,11 +47,10 @@ public class EmployeeControllerTest extends AbstractRestDocsTests {
                 .lastName("King")
                 .email("SKING")
                 .phoneNumber("515.123.4567")
-                .managerId(null)
-                .jobId("AD_PRES")
                 .salary(BigDecimal.valueOf((float) 24000.00))
-                .departmentId(90L)
-                .hireDate(LocalDate.of(1987, 06, 17)).build();
+                .hireDate(LocalDate.of(1987, 06, 17))
+                .startDate(null).endDate(null)
+                .build();
         given(employeeService.findSpecificEmployee(100L)).willReturn(employee);
 
         EmployeeResponse employeeResponse = employeeService.findSpecificEmployee(100L);
@@ -66,6 +65,8 @@ public class EmployeeControllerTest extends AbstractRestDocsTests {
 
         Assertions.assertEquals(employee.getEmployeeId(), employeeResponse.getEmployeeId());
         Assertions.assertEquals(employee.getFirstName(), employeeResponse.getFirstName());
+        Assertions.assertEquals(employee.getStartDate(), employeeResponse.getStartDate());
+        Assertions.assertEquals(employee.getEndDate(), employeeResponse.getEndDate());
         Assertions.assertEquals(employee.getLastName(), employeeResponse.getLastName());
         Assertions.assertEquals(employee.getEmail(), employeeResponse.getEmail());
 
