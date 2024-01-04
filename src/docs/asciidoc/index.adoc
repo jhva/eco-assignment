@@ -70,3 +70,4 @@
 ```
 
 include::employee.adoc[]
+include::department.adoc[]

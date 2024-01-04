@@ -1,0 +1,18 @@
+== 부서 및 위치 조회
+
+Request
+
+include::{snippets}/department-controller-test/부서_및_위치_정보를_조회_성공/httpie-request.adoc[]
+
+PathParameter
+
+include::{snippets}/department-controller-test/부서_및_위치_정보를_조회_성공/path-parameters.adoc[]
+
+Response
+
+- 200 Ok
+
+include::{snippets}/department-controller-test/부서_및_위치_정보를_조회_성공/http-response.adoc[]
+
+- 400 BadRequest
+include::{snippets}/department-controller-test/부서_및_위치_정보를_조회_실패/http-response.adoc[]
