@@ -69,7 +69,6 @@ public class EmployeeControllerTest extends AbstractRestDocsTests {
         Assertions.assertEquals(employee.getEndDate(), employeeResponse.getEndDate());
         Assertions.assertEquals(employee.getLastName(), employeeResponse.getLastName());
         Assertions.assertEquals(employee.getEmail(), employeeResponse.getEmail());
-
     }
 
     @Test

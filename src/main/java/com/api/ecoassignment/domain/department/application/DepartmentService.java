@@ -21,7 +21,7 @@ public class DepartmentService {
         return departmentRepository.searchDepartment(departmentId);
     }
 
-    public Long validateDepartmentCheckId(Long id) {
+    private Long validateDepartmentCheckId(Long id) {
         Department department = departmentRepository.findById(id).orElseThrow(
                 () -> new BusinessException(id, "departmentId",
                         ErrorCode.DEPARTMENT_NOT_FOUND));
