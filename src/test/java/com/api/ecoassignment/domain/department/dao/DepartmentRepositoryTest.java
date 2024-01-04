@@ -1,5 +1,6 @@
 package com.api.ecoassignment.domain.department.dao;
 
+import com.api.ecoassignment.domain.department.dto.response.DepartmentAndEmployeeDto;
 import com.api.ecoassignment.domain.department.dto.response.DepartmentResponseDto;
 import com.api.ecoassignment.global.querydsl.QuerydslConfig;
 import java.util.List;
@@ -33,7 +34,8 @@ public class DepartmentRepositoryTest {
 
     @Test
     void 특정_부서_급여_인상을_위한_부서와_사원_직업테이블을_조회한다() {
-        List<?> departmentAllByDepartmentName = departmentRepository.updateDepartmentIncreaseSalary("Purchasing");
+        List<DepartmentAndEmployeeDto> departmentAllByDepartmentName = departmentRepository.searchDepartmentByDepartmentName(
+                "Purchasing");
 
         Assertions.assertThat(departmentAllByDepartmentName.size()).isEqualTo(6);
     }
