@@ -18,3 +18,22 @@ include::{snippets}/employee-controller-test/특정_사원의_현재_정보를_�
 
 - 400 BadRequest
 include::{snippets}/employee-controller-test/특정_사원의_현재_정보_실패/http-response.adoc[]
+
+=== 특정 사원 이력 조회
+
+Request
+
+include::{snippets}/employee-controller-test/특정_사원의_이력_정보를_조회한다/httpie-request.adoc[]
+
+PathParameter
+
+include::{snippets}/employee-controller-test/특정_사원의_이력_정보를_조회한다/path-parameters.adoc[]
+
+Response
+
+- 200 Ok
+
+include::{snippets}/employee-controller-test/특정_사원의_이력_정보를_조회한다/http-response.adoc[]
+
+- 400 BadRequest
+include::{snippets}/employee-controller-test/특정_사원의_이력_정보_실패/http-response.adoc[]

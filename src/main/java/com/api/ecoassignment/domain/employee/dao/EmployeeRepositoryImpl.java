@@ -34,6 +34,7 @@ public class EmployeeRepositoryImpl implements EmployeeQueryRepository {
 
     @Override
     public EmployeeDetailsResponseDto searchSpecificEmployee(Long employeeId) {
+
         return queryFactory
                 .select(
                         Projections.constructor(EmployeeDetailsResponseDto.class, qe.email, qe.firstName,

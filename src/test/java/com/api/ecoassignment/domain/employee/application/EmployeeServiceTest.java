@@ -47,10 +47,10 @@ public class EmployeeServiceTest {
         }
 
         @Test
-        void 특정_사원_이력을_id_100L_기준으로_조회한다() {
+        void 특정_사원_이력을_id_101L_기준으로_조회한다() {
 
-            EmployeeDetailsResponseDto employeeResponse = employeeService.findEmployeeRecord(100L);
-            Assertions.assertEquals(employeeResponse.getCity(), "Seattle");
+            EmployeeDetailsResponseDto employeeResponse = employeeService.findEmployeeRecord(101L);
+            Assertions.assertEquals(employeeResponse.getStateProvince(), "Washington");
         }
     }
 }
