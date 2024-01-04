@@ -4,5 +4,5 @@ import com.api.ecoassignment.domain.employee.dto.response.EmployeeDetailsRespons
 
 public interface EmployeeQueryRepository {
 
-    EmployeeDetailsResponseDto findEmployeeDetail(Long employeeId);
+    EmployeeDetailsResponseDto searchSpecificEmployee(Long employeeId);
 }
