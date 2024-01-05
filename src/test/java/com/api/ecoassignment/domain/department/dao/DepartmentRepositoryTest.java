@@ -2,7 +2,7 @@ package com.api.ecoassignment.domain.department.dao;
 
 import com.api.ecoassignment.domain.department.dto.response.DepartmentAndEmployeeDto;
 import com.api.ecoassignment.domain.department.dto.response.DepartmentResponseDto;
-import com.api.ecoassignment.global.querydsl.QuerydslConfig;
+import com.api.ecoassignment.global.config.querydsl.QuerydslConfig;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

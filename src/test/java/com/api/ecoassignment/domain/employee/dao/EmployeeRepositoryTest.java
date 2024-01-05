@@ -3,7 +3,7 @@ package com.api.ecoassignment.domain.employee.dao;
 
 import com.api.ecoassignment.domain.employee.dto.response.EmployeeDetailsResponseDto;
 import com.api.ecoassignment.domain.employee.dto.response.EmployeeResponse;
-import com.api.ecoassignment.global.querydsl.QuerydslConfig;
+import com.api.ecoassignment.global.config.querydsl.QuerydslConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

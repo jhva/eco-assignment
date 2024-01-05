@@ -24,3 +24,9 @@ decorator:
   datasource:
     p6spy:
       enable-logging: true
+
+open-api:
+  enkey: mS8eocglDCoWXFZygs0nKhgM8bKalgCaaNjt%2FnCsK2UX36vwt%2Fb%2FVAcrciN7RIJOGc5zMPOr9ZP1nElUTbVAqA%3D%3D
+  dekey: mS8eocglDCoWXFZygs0nKhgM8bKalgCaaNjt/nCsK2UX36vwt/b/VAcrciN7RIJOGc5zMPOr9ZP1nElUTbVAqA==
+
+  url: https://www.daegufood.go.kr/kor/api/Alley.html?mode=json
