@@ -16,3 +16,25 @@ include::{snippets}/department-controller-test/부서_및_위치_정보를_조�
 
 - 400 BadRequest
 include::{snippets}/department-controller-test/부서_및_위치_정보를_조회_실패/http-response.adoc[]
+
+== 특정 부서의 급여를 특정 비율로 인상 및 사원 정보 업데이트
+
+Request
+
+include::{snippets}/department-controller-test/부서_급여_인상_업데이트_성공/httpie-request.adoc[]
+
+RequestBody
+
+include::{snippets}/department-controller-test/부서_급여_인상_업데이트_성공/request-body.adoc[]
+
+Response
+
+- 200 Ok
+
+include::{snippets}/department-controller-test/부서_급여_인상_업데이트_성공/http-response.adoc[]
+
+- 400 BadRequest
+include::{snippets}/department-controller-test/컬럼이_null인_경우/http-response.adoc[]
+include::{snippets}/department-controller-test/퍼센테이지가_100_이상인_경우/http-response.adoc[]
+
+include::{snippets}/department-controller-test/부서_업데이트시_조회된_갯수가_0개인_경우_실패/http-response.adoc[]

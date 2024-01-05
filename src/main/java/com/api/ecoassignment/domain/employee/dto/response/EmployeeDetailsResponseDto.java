@@ -18,13 +18,13 @@ public class EmployeeDetailsResponseDto {
     private String lastName;
     private String phoneNumber;
     private LocalDate hireDate;
-    
+
     private Long employeeId;
     private BigDecimal salary;
     private String jobId;
     private String jobTitle;
-    private Integer maxSalary;
-    private Integer minSalary;
+    private BigDecimal maxSalary;
+    private BigDecimal minSalary;
     private Long departmentId;
     private String departmentName;
     private Long locationId;

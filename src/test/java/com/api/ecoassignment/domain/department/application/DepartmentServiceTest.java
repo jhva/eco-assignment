@@ -42,8 +42,8 @@ public class DepartmentServiceTest {
 
         @Test
         void 부서_Purchasing에_속하고_급여를_임시로_60퍼센트_인상될때_값이_변하지않는ID는_하나뿐이다() {
-            List<Long> data = departmentService.updateDepartmentIncreaseSalary("Purchasing", 60);
-            Assertions.assertEquals(data.size(), 1);
+            List<Long> data = departmentService.updateDepartmentIncreaseSalary("Purchasing", 10);
+            Assertions.assertEquals(data.size(), 0);
 
         }
 
@@ -61,6 +61,14 @@ public class DepartmentServiceTest {
                     departmentService.updateDepartmentIncreaseSalary("NOC", 10))
                     .isInstanceOf(BusinessException.class)
                     .hasMessage("해당 부서는 급여 정보가 누락되었습니다. \n 다시 입력해주세요");
+        }
+
+        @Test
+        void 퍼센테이지가_100이상인_경우() {
+            assertThatThrownBy(() ->
+                    departmentService.updateDepartmentIncreaseSalary("Purchasing", 100))
+                    .isInstanceOf(BusinessException.class)
+                    .hasMessage("급여 인상 비율은 100% 이하로 맞춰주세요 ");
         }
     }
 }

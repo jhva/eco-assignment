@@ -39,12 +39,19 @@ public class DepartmentService {
         List<DepartmentAndEmployeeDto> findDepartmentByDepartmentName = checkDepartmentIsEmptyAndNull(departmentName);
         List<Long> errorEmployeeLongId = new ArrayList<>();
         Map<Boolean, BigDecimal> resultActions = new HashMap<>();
+        checkPercentageMoreThan100(impression);
 
         for (DepartmentAndEmployeeDto departmentAndEmployee : findDepartmentByDepartmentName) {
             processEmployeeData(departmentAndEmployee, impression, resultActions, errorEmployeeLongId);
         }
 
         return errorEmployeeLongId;
+    }
+
+    private void checkPercentageMoreThan100(Integer impression) {
+        if (impression >= 100) {
+            throw new BusinessException(impression, "impression", ErrorCode.PERCENTAGE_MORE_THAN_100);
+        }
     }
 
     private void processEmployeeData(DepartmentAndEmployeeDto departmentAndEmployee, Integer impression,
