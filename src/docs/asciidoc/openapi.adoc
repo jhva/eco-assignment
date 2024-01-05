@@ -1,0 +1,13 @@
+== 대구 광역시 음식 골목 조회 Open API
+
+=== https://www.data.go.kr/data/15057020/openapi.do?recommendDataYn=Y
+
+Request
+
+include::{snippets}/daegu-controller-test/대구_음식_골목점_조회_성공/httpie-request.adoc[]
+
+Response
+
+- 200 Ok
+
+include::{snippets}/daegu-controller-test/대구_음식_골목점_조회_성공/response-body.adoc[]

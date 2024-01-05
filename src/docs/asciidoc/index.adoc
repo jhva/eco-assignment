@@ -71,3 +71,4 @@
 
 include::employee.adoc[]
 include::department.adoc[]
+include::openapi.adoc[]
